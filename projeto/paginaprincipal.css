@@ -1,0 +1,112 @@
+body{
+    background-image: url(../projeto/img/oi.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding:0;
+    margin:0;
+    vertical-align:baseline;
+    list-style:none;
+    border:0
+}
+h1{
+    color: azure;
+    text-align: center;
+    margin: auto;
+}
+.a{
+    background-color: black;
+    
+}
+/* General styles for header elements */
+header {
+    display: flex; /* Allow horizontal layout for header elements */
+    justify-content: space-between; /* Distribute elements evenly */
+    align-items: center; /* Vertically align content within header */
+    padding: 0.1rem 2rem; /* Add some padding for spacing */
+    background-color: #616668; /* Light background color */
+    text-align: center;
+  }
+  
+  /* Styles for the "voltar" button */
+  header div:first-child a button {
+    background-color: #3498db; /* Blue button background */
+    color: white; /* White text color */
+    padding: 0.5rem 1rem; /* Button padding */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Indicate clickable behavior */
+  }
+  
+  header nav ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Allow horizontal layout for links */
+  }
+  
+  header nav ul li {
+    margin-right: 1rem; /* Space between navigation links */
+  }
+  
+  header nav ul li a {
+    text-decoration: none; /* Remove default underline */
+    color: #3498db; /* Blue link color */
+    font-weight: bold; /* Bold text for emphasis */
+  }
+  
+  /* Styles for the user profile image and name */
+  header div:last-child {
+    display: flex; /* Allow horizontal layout for image and name */
+    align-items: center; /* Vertically align image and name */
+    margin-right: 5px;
+    
+  }
+  
+  header div:last-child img {
+    width: 50px; /* Set image width */
+    height: 50px; /* Set image height */
+    border-radius: 50%; /* Make image circular */
+    margin-right: 1rem; /* Space between image and name */
+   
+  }
+  
+  header div:last-child h2 {
+    margin: 0; /* Remove default margin */
+    font-size: 1rem; /* Set font size for user name */
+    
+  }
+  .rounded-image {
+    border-radius: 50%;
+  }
+  
+  .panel {
+    border: 1px solid black;
+    background: #eee url("subtle_texture.png");
+    margin: 5px;  /* Add spacing between panels */
+    float: left;   /* Arrange panels horizontally */
+    width: 45%;    /* Adjust panel width as needed */
+  }
+  .speech-bubble {
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    position: relative; /* For tail positioning */
+  }
+  
+  .speech-bubble:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 5px 5px 0 0;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+  
+  .text-box {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+  }
+  
