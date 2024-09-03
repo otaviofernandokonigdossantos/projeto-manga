@@ -1,11 +1,44 @@
+<?php
+include_once('config.php');
 
+// Checkar conexão
+if ($conexao->connect_error) {
+    die("Erro de conexão com o banco de dados: " . $conexao->connect_error);
+}
 
+// Receber dados do formulário
+if (isset($_POST['nome'])  && isset($_POST['email']) && isset($_POST['senha']) && isset($_POST['telefone']) && isset($_POST['endereco'])) {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $telefone = $_POST['telefone'];
+    $endereco = $_POST['endereco'];
+    
+} else {
+    echo "Erro: Dados do formulário não enviados corretamente.";
+}
 
+// Verificar se o e-mail já existe
+$sql_verifica_email = "SELECT COUNT(*) FROM usuarios WHERE email = '$email'";
+$resultado_verifica = $conexao->query($sql_verifica_email);
 
+if ($resultado_verifica->fetch_row()[0] > 0) {
+    echo "Erro: E-mail já cadastrado. Tente outro e-mail.";
+} else {
+    // Se o e-mail não existir, prosseguir com a inserção
+    $sql = "INSERT INTO usuarios (nome, email, senha, telefone, endereco) VALUES ('$nome', '$email' , '$senha' , '$telefone' , '$endereco')";
 
+    if ($conexao->query($sql) === TRUE) {
+        echo "Usuário cadastrado com sucesso!";
+    } else {
+        echo "Erro ao cadastrar o usuário: " . $conexao->error;
+    }
+}
 
+$conexao->close();
 
-
+    
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +58,7 @@
         <h1>Projeto A</h1>
         <h2>Cadastro</h2>
 
-        <form action="processar_cadastro.php" method="post"> <div class="campo">
+        <form action="CADASTRO.php" method="post"> <div class="campo">
                 <label for="nome">Nome Completo:</label>
                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
             </div>
@@ -41,8 +74,8 @@
             </div>
 
             <div class="campo">
-                <label for="numero">Número de Telefone:</label>
-                <input type="tel" id="numero" name="numero" placeholder="Digite seu número de telefone" required>
+                <label for="telefone">Número de Telefone:</label>
+                <input type="text" id="telefone" name="telefone" placeholder="Digite seu número de telefone" required>
             </div>
 
             <div class="campo">
@@ -57,3 +90,9 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+

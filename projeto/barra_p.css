@@ -1,0 +1,22 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: darkorange;
+    padding: 1em;
+}
+
+form{
+    border:1px solid black;
+    border-radius: 0.3em;
+    padding: 0.3em;
+}
+
+form imput , form button {
+    font-size: ;
+
+}
