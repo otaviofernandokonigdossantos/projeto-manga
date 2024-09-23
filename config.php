@@ -3,7 +3,7 @@
     $dbHost = 'Localhost';
     $dbUsername = 'root';
     $dbPassword = 'escola';
-    $dbName = 'projeto a';
+    $dbName = 'projeto_A';
     
     $conexao = new mysqli($dbHost,$dbUsername,$dbPassword,$dbName);
 

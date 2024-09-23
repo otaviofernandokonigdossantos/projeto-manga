@@ -1,3 +1,51 @@
+
+<?php
+include_once('config.php');
+
+// Verifica se houve um envio de formulário
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recebe os dados do formulário
+    $email = $_POST["email"];
+    $senha = $_POST["senha"];
+
+    // Validação básica (adicione mais validações conforme necessário)
+    if (empty($email) || empty($senha)) {
+        echo "Por favor, preencha todos os campos.";
+    } else {
+        // Prepare a consulta SQL para evitar injeção
+        $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE email=? AND senha=?");
+        $stmt->bind_param("ss", $email, $senha); // Assumindo que email e senha são strings
+
+        // Executa a consulta
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                // Verifica o tipo de usuário
+                if ($row['tipo'] == 1) {
+                    // Login válido para administrador, redireciona para adm.php
+                    header("Location: adm.php");
+                } else {
+                    // Login válido para outro tipo de usuário, redireciona para home
+                    header("Location: mangas.php");
+                }
+            } else {
+                echo "Email ou senha inválidos.";
+            }
+        } else {
+            // Trata erros na execução da consulta
+            echo "Erro ao realizar a consulta: " . $stmt->error;
+        }
+
+        $stmt->close();
+        $conexao->close();
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +53,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tela de login</title>
-    
-    <a href="CADASTRO.php"><button>voltar</button></a id="io"><br><br> 
-
-
+ 
     <style>
         
         body{
-            background-image: url(../projeto/img/jujutsu_kaisen___toji_fushiguro_wallpaper_by_knotshoxtm_deklx77-fullview.jpg);
+            background-image: url(backgrondimage.jpg);
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -64,18 +109,19 @@
     </style>
 </head>
 <body>
+<a href=".php"><button>voltar</button></a><br><br> 
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div id="div1">
         <h1>Login</h1>
-        <input type="text" placeholder="E-mail">
+        <input type="text" name="email" placeholder="E-mail">
         <br><br>
-        <input type="password" placeholder="Senha">
+        <input type="password" name="senha" placeholder="Senha">
         <br><br>
-        <a href="esqueceu sua senha.php">
-            <div class="div2"> esqueceu sua senha</div></a> <br>
-        
-        
-        <a href="paginaprincipal.php"><button>Enviar</button></a><br><br>
+        <a href="esqueceu_sua_senha.php" title="Recuperar senha">Esqueceu sua senha?</a>
+        <br><br>
+        <button type="submit">Entrar</button>
     </div>
+</form>
     
 
 
