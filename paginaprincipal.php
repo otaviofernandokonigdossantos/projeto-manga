@@ -22,7 +22,7 @@
           <li><a href="mangas.php">Mangás</a></li>
           <li><a href="chat.php">chat</a></li>
           <li><a href="em_altas.php">Em Altas</a></li>
-          <li><a href="ano.php">Ano</a></li>
+          <li><a href="ANO.php">Ano</a></li>
         </ul>
     </nav>
     <div>
@@ -34,7 +34,18 @@
 </header>
 
 <section>
- 
+<?php
+
+// ... (código existente de conexão com o banco de dados)
+
+// Array com os gêneros
+$generos = array("ação", "romance", "drama", "comédia", "terror");
+
+// ... (código existente de verificação de login)
+
+// Após o redirecionamento para mangas.php
+?>
+
   <table id="tab2">
           
     <div id="opcoes">
@@ -56,7 +67,7 @@
             comédia
         </option>
         <option>
-        amor
+        romance
           </option>
       </select>
     </div><br>
@@ -116,7 +127,7 @@ include_once('config.php');
 
 
 // Preparando a query SQL para selecionar os dados
-$sql = "SELECT nome, editora, codigo, ano_publicacao, imagem FROM mangas";
+$sql = "SELECT nome, editora, codigo, genero, ano_publicacao, imagem FROM mangas";
 $result = $conexao->query($sql);
 
 if ($result->num_rows > 0) {
@@ -128,8 +139,9 @@ if ($result->num_rows > 0) {
       echo "<div class='p'> <img src='" . $row["imagem"] . "' alt='Imagem'><br>" . "</div>";
       echo "<div class='p'> EDITORA: " . $row["editora"]. "</div>";
       echo "<div class='p'> CODIGO:" . $row["codigo"]. "</div>"; 
+      echo "<div class='p'> GENERO:" . $row["genero"]. "</div>";
       echo "<div class='p'> ANO:" . $row["ano_publicacao"]. "</div>"; 
-      echo '<a href="colab.html"><button>LER</button></a>';
+      echo '<a href="colab.php"><button>LER</button></a>';
       echo "</div>";  
         
     }

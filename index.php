@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 <body>
-<a href=".php"><button>voltar</button></a><br><br> 
+<a href="cadastro.php"><button>voltar</button></a><br><br> 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div id="div1">
         <h1>Login</h1>

@@ -8,6 +8,31 @@
     <title>Document</title>
 </head>
 <body>
+  
+<?php
+
+// ... (código existente de conexão com o banco de dados)
+
+// Array com os gêneros
+$generos = array("ação", "romance", "drama", "comedia", "terror");
+
+// ... (código existente de verificação de login)
+
+// Após o redirecionamento para mangas.php
+?>
+<?php
+            foreach ($generos as $genero) {
+                echo "<li><a href='mangas.php?genero=$genero'>$genero</a></li>";
+            }
+            ?>
+        </ul>
+    </nav>
+
+    <?php
+    // ... (código para exibir os mangás, considerando o gênero selecionado)
+    ?>
+</body>
+</html>
     <a href="paginaprincipal.php"><button>voltar</button></a><br><br> 
     <style>
     body{
@@ -20,113 +45,84 @@
     button{
         background-color: rgb(255, 115, 0);
     }</style>
-   
+   <style>
+     /* cards.css */
+
+.card {
+  /* Estilos para todos os cards */
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+ 
+  
+}
+
+.card-header {
+  /* Estilos para o cabeçalho do card */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+section {
+  /* Estilos para a seção de conteúdo */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+img {
+  /* Estilos para a imagem */
+  max-width: 100%;
+  height: 200px;
+  margin-right: 10px;
+}
+.certo{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  margin-inline: center;
+  flex-wrap: wrap;
+}
+button{
+  background-color: orangered;
+
+}
+    </style>
+</head>
 <body>
-    <div class="container">
-        <div class="taiju.jpg"></div>
-        <div class="madara.jpg"></div>
-        <div class="dante.jpg"></div>
-        <div class="Scorpion.jpg"></div>
-       </div>
-       <div id="div">
-        <table  id = "tab" >
-            <tr id="tr">
-                <td id="a">
-                <img src="img/leonidas" id="img">
-                </td>
-                <td id="b">
-                <img src="img/jack.jpeg" id="img">
-                </td>
-                <td id="c">
-                <img src="img/" id="img">
-                </td>
-                <td id="d">
-                <img src="img/demon.jpg" id="img">
-                </td>    
-                <page  id = "e" >
-                <img src="img/rain.jpg" id="img">
-                </td>
-                
-            </tr>   
-        </table>
-        <table  id = "tab">
-            <tr id="tr">
-                <td id="f">
-                <img src="img/toji.jpg" id="img">
-                </td>
-                <td id="g">
-                <img src="img/obito.jpg" id="img">
-                </td>
-                <td id="h">
-                <img src="img/taiju.jpg" id="img">
-                </td>
-                <td id="i">
-                <img src="img/baki 2.jpg" id="img">
-                </td>    
-                <td id="j">
-                <img src="img/cain.jpg" id="img">
-                </td>
-                
-            </tr>   
-        </table>
-        <table  id = "tab">
-            <tr id="tr">
-                <td id="k">
-                <img src="img/ira.png" id="img">
-                </td>
-                <td id="l">
-                <img src="img/slayer.jpg" id="img">
-                </td>
-                <td id="m">
-                <img src="img/yugi.jpg" id="img">
-                </td>
-                <td id="n">
-                <img src="img/Scorpion.jpg" id="img">
-                </td>    
-                <page  id = "from" >
-                <img src="img/dante.jpg" id="img">
-                </td>
-                
-            </tr>   
-        </table>
-        <table  id = "tab" >
-            <tr id="tr">
-                <td id="p">
-                <img src="img/vergil.jpg" id="img">
-                </td>
-                <td id="q">
-                <img src="img/madara.jpg" id="img">
-                </td>
-                <td id="r">
-                <img src="img/broly.jpg" id="img">
-                </td>
-                <td id="s">
-                <img src="img/ichigo.jpg" id="img">
-                </td>    
-                <td id="t">
-                <img src="img/raiden.jpg" id="img">
-                </td>
-                
-            </tr>   
-        </table>
-        <table  id = "tab" >
-            <tr id="tr">
-                <td id="u">
-                <img src="img/wolverine.jpg" id="img">
-                </td>
-                <td id="v">
-                <img src="img/sukuna.jpg" id="img">
-                </td>
-                <td id="w">
-                <img src="img/nero.jpg" id="img">
-                </td>
-                <td id="x">
-                <img src="img/barbabranca.jpg" id="img">
-                </td>    
-                <td id="y">
-                <img src="img/batman.jpg" id="img">
-                </td>
-                
+<div class="certo">
+<?php
+include_once('config.php');
+
+
+// Preparando a query SQL para selecionar os dados
+$sql = "SELECT nome, editora, codigo, genero, ano_publicacao, imagem FROM mangas";
+$result = $conexao->query($sql);
+
+if ($result->num_rows > 0) {
+    // Saída dos dados de cada linha
+    while($row = $result->fetch_assoc()) {
+      
+      echo "<div class='card'>";
+      echo "<div class='card-header'>  " . $row["nome"] . "</div>";
+      echo "<div class='p'> <img src='" . $row["imagem"] . "' alt='Imagem'><br>" . "</div>";
+      echo "<div class='p'> EDITORA: " . $row["editora"]. "</div>";
+      echo "<div class='p'> CODIGO:" . $row["codigo"]. "</div>"; 
+      echo "<div class='p'> GENERO:" . $row["genero"]. "</div>";
+      echo "<div class='p'> ANO:" . $row["ano_publicacao"]. "</div>"; 
+      echo '<a href="colab.php"><button>LER</button></a>';
+      echo "</div>";  
+        
+    }
+} else {
+    echo "0 resultados";
+}
+
+$conexao->close();
+?>
+
+
+
             </tr>   
         </table>
     </div>

@@ -22,14 +22,14 @@
     <section class="contato">
     <a href="cadastro_produto.php"><button>Cadastrar produto</button></a>
     <a href="mangas.php"><button>visualizar manga</button></a>
-    
-
+    <a href="lista_de_clientes.php"><button>visualizar lista de clientes</button></a>
+    <a href="lista_de_mangas.php"><button>visualizar lista de mangas</button></a>
 
         
                 
     </section>
     <footer>
-        <p>&copy;2023 Todos os  direitos reservados.</p>
+        <p>&copy;2024 Todos os  direitos reservados.</p>
     </footer>
    
 </body>

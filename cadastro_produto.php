@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $editora = $_POST['editora'];
     $codigo = $_POST['codigo'];
     $ano_publicacao = $_POST['ano_publicacao'];
+    $genero = $_POST['genero'];
     $imagem = $_FILES["imagem"];
 
     // Upload da imagem
@@ -33,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Inserir os dados na tabela
-    $stmt = $conexao->prepare("INSERT INTO mangas (nome, editora, codigo, ano_publicacao, imagem) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nome, $editora, $codigo, $ano_publicacao, $imagem_path);
+    $stmt = $conexao->prepare("INSERT INTO mangas (nome, editora, codigo, ano_publicacao, genero, imagem) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $nome, $editora, $codigo, $ano_publicacao, $genero, $imagem_path,);
 
     if ($stmt->execute()) {
         echo "Novo mangá cadastrado com sucesso";
@@ -87,6 +88,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="year" id="ano_publicacao" name="ano_publicacao" required>
     </div>
 
+    <div class="campo">
+        <label for="genero">genero:</label>
+        <select id="genero" name="genero" required>
+            <option value="drama">drama</option>
+            <option value="açao">ação</option>
+            <option value="comedia">comédia</option>
+            <option value="terror">terror</option>
+            <option value="romance">romance</option>
+    </select>
+</div>
+            
     <div class="campo">
         <label for="imagem">Capa do Mangá (JPG, PNG):</label>
         <input type="file" id="imagem" name="imagem" accept="image/jpeg, image/png">
